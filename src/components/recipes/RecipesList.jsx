@@ -64,7 +64,7 @@ function RecipesList({collection}) {
 
   return (
     <div className='container-page'>
-      { !isLoadingCollectionName && <h1>{collectionName}</h1>}
+      { !isLoadingCollectionName && <h1>{collectionName.charAt(0).toUpperCase() + collectionName.slice(1).toLowerCase()}</h1>}
       { recipesListContent }
     </div>
   )

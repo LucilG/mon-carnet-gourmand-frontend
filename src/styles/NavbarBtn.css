@@ -1,6 +1,6 @@
 .link-btn {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   text-decoration: none;
   color: var(--primary-text);
@@ -22,10 +22,9 @@
   font-size: 24px;
 }
 
-.activePage {
+/* .activePage {
   border-bottom: 1px solid var(--primary-text);
 }
 .activePage:hover {
   color: var(--yellow);
-  border-bottom: 1px solid var(--yellow);
-}
+  /* border-bottom: 1px solid var(--yellow); */

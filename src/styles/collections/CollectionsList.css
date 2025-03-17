@@ -26,8 +26,8 @@
 .collectionCard:hover {
   background-color: var(--yellow);
   color: white;
-  border: 3px solid white;
-  transform: rotateX(45deg);
+  /* border: 3px solid white; */
+  transform: rotateX(20deg);
   transition: all 0.5s ease;
 
 }

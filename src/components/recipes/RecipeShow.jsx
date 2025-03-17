@@ -2,11 +2,10 @@ import '../../styles/recipes/RecipeShow.css';
 import React, { useState, useEffect } from 'react';
 import { API_RECIPE_URL } from '../../api/constantsAPI';
 import { useParams } from 'react-router';
-// import IconePrepaTime from '../images/icone_prepa_time.png';
-// import IconeDownloadFile from '../images/icone_download_pdf.png';
-// import IconeCookingTime from '../images/icone_cooking_time.png';
-// import IconeTotalTime from '../images/icone_total_time.png';
-// import IconeNbPeople from '../images/icone_nb_people.png';
+import { FaFileArrowDown, FaUsers } from "react-icons/fa6";
+import IconePrepaTime from '../../assets/icone_prepa_time.png';
+import IconeCookingTime from '../../assets/icone_cooking_time.png';
+import IconeTotalTime from '../../assets/icone_total_time.png';
 
 function RecipeShow() {
   const [recipe, setRecipe] = useState(null)
@@ -46,24 +45,24 @@ function RecipeShow() {
           <h2>{recipe.name.toUpperCase()}</h2>
           <div className="RecipeShowBannerSubIcones">
             <div className='RecipeShowBannerSubInfos'>
-              {/* <img src={IconeTotalTime} alt="total time" className='RecipeShowIcone'/> */}
+              <img src={IconeTotalTime} alt="total time" className='RecipeShowIcone'/>
               <p>Temps total : {recipe.prepa_time + recipe.cooking_time} min.</p>
             </div>
             <div className='RecipeShowBannerSubInfos'>
-              {/* <img src={IconePrepaTime} alt="preparation time" className='RecipeShowIcone'/> */}
+              <img src={IconePrepaTime} alt="preparation time" className='RecipeShowIcone'/>
               <p>Préparation : {recipe.prepa_time} min.</p>
             </div>
             <div className='RecipeShowBannerSubInfos'>
-              {/* <img src={IconeCookingTime} alt="cooking time" className='RecipeShowIcone'/> */}
+              <img src={IconeCookingTime} alt="cooking time" className='RecipeShowIcone'/>
               <p>Cuisson : {recipe.cooking_time} min.</p>
             </div>
           </div>
         </div>
-        {/* <img src={IconeDownloadFile} alt="download file" className='RecipeShowIcone'/> */}
+        <FaFileArrowDown alt="download file" />
       </div>
       <div className="RecipeShowIngredients">
         <div className="RecipeShowIngredientsNbPeople">
-          {/* <img src={IconeNbPeople} alt="number of people" className='RecipeShowIcone'/> */}
+          <FaUsers  alt="number of people" />
           <p>-</p>
           <p>{recipe.nb_people}</p>
           <p>+</p>
