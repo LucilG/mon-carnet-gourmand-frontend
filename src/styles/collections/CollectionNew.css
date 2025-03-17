@@ -1,13 +1,19 @@
 .CollectionNew {
-  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 24px;
   width: 100%;
-	padding: 50px;
+}
+
+.CollectionNew h2 {
+  color: var(--primary-text);
 }
 
 #CollectionNewForm {
   display: flex;
   flex-direction: column;
-  padding-inline: 100px;
+  padding-inline: 48px;
   gap: 20px;
 }
 

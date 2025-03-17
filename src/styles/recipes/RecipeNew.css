@@ -4,6 +4,10 @@
 	padding: 50px;
 }
 
+.RecipeNew h2 {
+  color: var(--primary-text);
+}
+
 #RecipeNewForm {
   display: flex;
   flex-direction: column;

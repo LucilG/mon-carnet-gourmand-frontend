@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import { API_COLLECTION_URL } from '../../api/constantsAPI';
 import { fetchData } from '../../api/fetchData';
-import { RECIPES_PATH } from '../../constants';
+import { COLLECTION_NEW_PATH, RECIPES_PATH } from '../../constants';
 
 function CollectionsList({setSelectedCollection}) {
 
@@ -45,7 +45,7 @@ function CollectionsList({setSelectedCollection}) {
     {collections.map((collection) => (
       <button key={collection.id} onClick={() => handleClick(`${collection.id}`)} className='collectionCard' >{collection.name}</button>
     ))}
-    <Link to="/collections/new" className='collectionCard' id="addCollection">+</Link>
+    <Link to={COLLECTION_NEW_PATH} className='collectionCard' id="addCollection">+</Link>
     </div>
   }
 
