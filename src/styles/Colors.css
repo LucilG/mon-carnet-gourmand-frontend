@@ -1,0 +1,28 @@
+/* colors */
+:root {
+  --yellow: rgb(255, 209, 0);
+  --green: rgb(42, 167, 56);
+  --bluegreen: rgb(33,170,147);
+  --orange: rgb(252, 129, 15);
+  --light-grey: rgb(244, 247, 252);
+}
+
+[data-theme = 'dark'] {
+  --background-color: #000000;
+  --primary-title: var(--green);
+  --banner-secondary-title: var(--green);
+  --primary-text: var(--green);
+  --background-recipe-card: var(--green);
+  --text-recipe-card: var(--light-grey);
+  --text-recipe-show: var(--light-grey);
+}
+
+[data-theme = 'light'] {
+  --background-color: var(--light-grey);
+  --primary-title: var(--green);
+  --banner-secondary-title: black;
+  --primary-text: var(--green);
+  --background-recipe-card: var(--light-grey);
+  --text-recipe-card: var(--green);
+  --text-recipe-show: var(--green);
+}

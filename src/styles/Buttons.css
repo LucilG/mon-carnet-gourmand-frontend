@@ -1,0 +1,42 @@
+.greenbtn {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 24px;
+  padding: 10px 18px;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--green);
+  border-radius: 50px;
+  border: 3px solid var(--green);
+}
+
+.greenbtn:hover {
+  background-color: white;
+  color: var(--yellow);
+  border: 3px solid var(--yellow);
+  transition: filter 0.4s ease;
+
+}
+
+.yellowbtn {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 24px;
+  padding: 10px 18px;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--yellow);
+  border-radius: 50px;
+  border: 3px solid var(--yellow);
+}
+
+.yellowbtn:hover {
+  background-color: white;
+  color: var(--yellow);
+  border: 3px solid var(--yellow);
+  transition: filter 0.4s ease;
+
+}
