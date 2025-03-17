@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
 import '../styles/NavBar.css';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom"
 import Logo from '../assets/icone_mon_carnet_gourmand_bluegreen.png'
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { IoHome, IoAddCircle, IoBook } from "react-icons/io5";
 import NavbarBtn from './NavbarBtn';
-import { ROOT_PATH, ADD_RECIPE_PATH, COLLECTION_PATH } from '../constants';
+import { ROOT_PATH, ADD_RECIPE_PATH, COLLECTIONS_PATH } from '../constants';
 
 function NavBar({setDarkMode, darkMode}) {
 
@@ -34,7 +34,7 @@ function NavBar({setDarkMode, darkMode}) {
           handleActivePage={handleActivePage}
         />
         <NavbarBtn
-        path={COLLECTION_PATH}
+        path={COLLECTIONS_PATH}
         icon={<IoBook alt="recipes book"/>}
         text='Mon carnet'
         activePage={activePage}

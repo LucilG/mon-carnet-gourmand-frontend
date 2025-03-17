@@ -1,5 +1,5 @@
-import React from 'react';
 import '../styles/Homepage.css';
+import React from 'react';
 import { Link } from 'react-router';
 
 function HomePage() {

@@ -1,0 +1,31 @@
+.RecipeCard {
+  border: 3px solid var(--text-recipe-card);
+  border-radius: 15px;
+  width: 250px;
+  height: 350px;
+  padding: 20px;
+  align-content: end;
+  text-align: left;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-recipe-card);
+  background-color: var(--background-recipe-card);
+}
+
+.RecipeCard h2 {
+  text-align: center;
+  font-size: 22px;
+}
+
+.RecipeCardInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+}
+
+.RecipeCardIcone {
+  width: 24px;
+  height: 24px;
+}

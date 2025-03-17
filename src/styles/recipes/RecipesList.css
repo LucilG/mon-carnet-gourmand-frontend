@@ -1,0 +1,10 @@
+.RecipesList {
+  margin-top: 30px;
+  width: 100%;
+	padding: 50px;
+	display: flex;
+	flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
