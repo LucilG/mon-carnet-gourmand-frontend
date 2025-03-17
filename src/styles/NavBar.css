@@ -1,0 +1,40 @@
+.NavBar {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--background-color);
+  /* background-color: var(--white); */
+}
+
+#NavbarLogoAndName {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  margin-left: 5px;
+}
+
+#NavbarLogo {
+  width: 50px;
+  height: 50px;
+}
+
+.NavBar h2 {
+  color: var(--primary-title);
+}
+
+.iconDarkMode {
+  color: var(--primary-title);
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.linkBtns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-block: 15px;
+}

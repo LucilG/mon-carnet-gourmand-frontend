@@ -1,0 +1,31 @@
+.link-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--primary-text);
+  margin-inline: 15px;
+  border-bottom: 1px solid var(--background-color);
+}
+
+.link-btn:hover {
+  color: var(--yellow);
+  /* border-bottom: 1px solid var(--primary-text); */
+}
+
+.link-btn p {
+  font-size: 16px;
+  margin: 0px;
+}
+
+.link-btn i {
+  font-size: 24px;
+}
+
+.activePage {
+  border-bottom: 1px solid var(--primary-text);
+}
+.activePage:hover {
+  color: var(--yellow);
+  border-bottom: 1px solid var(--yellow);
+}
