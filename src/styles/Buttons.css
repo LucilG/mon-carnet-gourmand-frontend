@@ -1,3 +1,4 @@
+/* GREEN BUTTON */
 .greenbtn {
   text-decoration: none;
   color: white;
@@ -20,6 +21,7 @@
 
 }
 
+/* YELLOW BUTTON */
 .yellowbtn {
   text-decoration: none;
   color: white;
@@ -39,4 +41,20 @@
   border: 3px solid var(--yellow);
   transition: filter 0.4s ease;
 
+}
+
+/* GO BACK BUTTON */
+.gobackbtn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--primary-text);
+  margin-left: 48px;
+  gap: 8px;
+
+
+}
+.gobackbtn:hover {
+  color: var(--yellow);
 }

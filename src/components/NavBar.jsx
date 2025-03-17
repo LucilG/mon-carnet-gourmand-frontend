@@ -1,5 +1,5 @@
 import '../styles/NavBar.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom"
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { IoHome, IoAddCircle, IoBook, IoMenu } from "react-icons/io5";
@@ -20,10 +20,10 @@ function NavBar({setDarkMode, darkMode}) {
   return (
     <header className="NavBar">
       {/* Logo + name */}
-      <div id='NavbarLogoAndName'>
-        <PiChefHatBold alt='logo' id="NavbarLogo"/>
-        <h2>Mon Carnet Gourmand</h2>
-      </div>
+      <Link to={ROOT_PATH} id='NavbarLogoAndName'>
+          <PiChefHatBold alt='logo' id="NavbarLogo"/>
+          <h2>Mon Carnet Gourmand</h2>
+      </Link>
 
       {/* menu */}
       <div className='menuContainer'>

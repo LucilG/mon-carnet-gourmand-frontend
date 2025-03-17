@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import RecipeCard from './RecipeCard';
 import { API_RECIPE_URL, API_COLLECTION_URL } from '../../api/constantsAPI';
 import { fetchData } from '../../api/fetchData';
+import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa6";
+import { COLLECTIONS_PATH } from '../../constants';
 
 function RecipesList({collection}) {
   const [recipes, setRecipes] = useState([]);
@@ -64,7 +67,12 @@ function RecipesList({collection}) {
 
   return (
     <div className='container-page'>
-      { !isLoadingCollectionName && <h1>{collectionName.charAt(0).toUpperCase() + collectionName.slice(1).toLowerCase()}</h1>}
+      <Link to={COLLECTIONS_PATH} className='gobackbtn'>
+        <FaArrowLeft />
+        <p>Go Back</p>
+      </Link>
+
+      { !isLoadingCollectionName && <h1 className='recipesListName'>{collectionName.charAt(0).toUpperCase() + collectionName.slice(1).toLowerCase()}</h1>}
       { recipesListContent }
     </div>
   )

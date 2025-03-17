@@ -1,7 +1,9 @@
 import '../../styles/collections/CollectionNew.css';
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { API_COLLECTION_URL } from '../../api/constantsAPI';
+import { COLLECTIONS_PATH } from '../../constants';
+import { FaArrowLeft } from "react-icons/fa6";
 
 function CollectionNew() {
   const [name, setName] = useState('');
@@ -35,11 +37,18 @@ function CollectionNew() {
 
   return (
     <div className='CollectionNew'>
-      <h2>Ajouter une nouvelle catégorie à votre carnet de recette :</h2>
-      <form action='submit' onSubmit={handleSubmit} id='CollectionNewForm'>
-        <input type='text' name='name' placeholder='Nom de la nouvelle catégorie...' className='collectionInput' onChange={(e) => setName(e.target.value)} />
-        <button type='submit' className='yellowbtn'>Ajouter maintenant !</button>
-      </form>
+      <Link to={COLLECTIONS_PATH} className='gobackbtn'>
+        <FaArrowLeft />
+        <p>Go Back</p>
+      </Link>
+
+      <div>
+        <h2>Ajouter une nouvelle catégorie à votre carnet de recette :</h2>
+        <form action='submit' onSubmit={handleSubmit} id='CollectionNewForm'>
+          <input type='text' name='name' placeholder='Nom de la nouvelle catégorie...' className='collectionInput' onChange={(e) => setName(e.target.value)} />
+          <button type='submit' className='yellowbtn'>Ajouter maintenant !</button>
+        </form>
+      </div>
     </div>
   )
 }
