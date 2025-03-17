@@ -6,7 +6,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import HomePage from './components/Homepage';
-import { ROOT_PATH } from './constants';
+import { ROOT_PATH, COLLECTIONS_PATH, RECIPES_PATH, COLLECTION_NEW_PATH, RECIPES_NEW_PATH, RECIPES_SHOW_PATH } from './constants';
+import CollectionsList from './components/collections/CollectionsList';
+import RecipesList from './components/recipes/RecipesList';
+import CollectionNew from './components/collections/CollectionNew';
+import RecipeNew from './components/recipes/RecipeNew';
+import RecipeShow from './components/recipes/RecipeShow';
 
 function App() {
   // (dark/light) theme mode which takes by default the local config
@@ -17,17 +22,20 @@ function App() {
     setDarkMode(preferences);
 }, []);
 
+
+  const [selectedCollection, setSelectedCollection] = useState("all");
+
   return (
     <Router>
       <div className='App' data-theme={darkMode ? 'dark' : 'light'}>
         <NavBar setDarkMode={setDarkMode} darkMode={darkMode}/>
         <Routes>
           <Route path={ROOT_PATH} element={<HomePage />} />
-          {/* <Route path='/recipes' element={<RecipesList collection={selectedCollection} />} /> */}
-          {/* <Route path='/recipes/:id' element={<RecipeShow />} /> */}
-          {/* <Route path='/recipes/new' element={<RecipeNew />} /> */}
-          {/* <Route path='/collections' element={<CollectionsList setSelectedCollection={setSelectedCollection}/>} /> */}
-          {/* <Route path='/collections/new' element={<CollectionNew />} /> */}
+          <Route path={RECIPES_PATH} element={<RecipesList collection={selectedCollection} />} />
+          <Route path={RECIPES_SHOW_PATH} element={<RecipeShow />} />
+          <Route path={RECIPES_NEW_PATH} element={<RecipeNew />} />
+          <Route path={COLLECTIONS_PATH} element={<CollectionsList setSelectedCollection={setSelectedCollection}/>} />
+          <Route path={COLLECTION_NEW_PATH} element={<CollectionNew />} />
         </Routes>
         <Footer />
       </div>

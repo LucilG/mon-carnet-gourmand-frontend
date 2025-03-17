@@ -1,6 +1,6 @@
+import "../styles/NavbarBtn.css"
 import { Link } from 'react-router';
 import React from 'react';
-import "../styles/NavbarBtn.css"
 
 function NavbarBtn({ path, icon, text, activePage, handleActivePage}) {
 

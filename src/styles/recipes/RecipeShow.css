@@ -1,0 +1,73 @@
+.RecipeShow {
+  margin-top: 30px;
+  width: 100%;
+	padding: 50px;
+  justify-items: center;
+  color: var(--text-recipe-show);
+}
+
+.RecipeShowIcone {
+  width: 30px;
+  height: 30px;
+}
+
+.RecipeShowBanner {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 80%;
+  justify-content: center;
+  align-items: first baseline;
+}
+
+.RecipeShowBannerInfos {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.RecipeShowBannerInfos h2 {
+  margin: 0;
+
+}
+
+.RecipeShowBannerSubIcones {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.RecipeShowBannerSubInfos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.RecipeShowIngredients{
+  border: 1px solid var(--green);
+  border-radius: 15px;
+  width: 80%;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.RecipeShowIngredientsNbPeople {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  gap: 10px;
+
+  p {
+    font-size: 16px;
+  }
+}
+
+.RecipeShowInstructions{
+  border: 1px solid var(--green);
+  border-radius: 15px;
+  width: 80%;
+  margin-top: 20px;
+  padding: 20px;
+}

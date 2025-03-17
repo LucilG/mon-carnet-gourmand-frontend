@@ -1,0 +1,22 @@
+.CollectionNew {
+  margin-top: 30px;
+  width: 100%;
+	padding: 50px;
+}
+
+#CollectionNewForm {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 100px;
+  gap: 20px;
+}
+
+.collectionInput {
+  border-radius: 25px;
+  padding: 10px 20px;
+  background-color: white;
+}
+
+.collectionInput:focus {
+  background-color: rgba(255, 209, 0, 0.2);
+}
