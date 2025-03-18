@@ -4,12 +4,16 @@ import { API_COLLECTION_URL } from '../api/constantsAPI';
 
 const CollectionsContext = createContext();
 
-function Provider( { children } ) {
+function ProviderCollections( { children } ) {
   const [collections, setCollections] = useState([]);
+  const [oneCollection, setOneCollection] = useState(null);
+
   const [isLoadingCollections, setIsLoadingCollections] = useState(true);
   const [errorCollections, setErrorCollections] = useState(null);
 
-  // fetch to the json server
+  const [selectedCollection, setSelectedCollection] = useState("all");
+
+  // FETCH COLLECTIONS : fetch to the json server
   async function fetchCollections() {
     try {
       const response = await axios.get(API_COLLECTION_URL);
@@ -24,7 +28,23 @@ function Provider( { children } ) {
     }
   };
 
-  // create a new collection and send it to the json server
+    // FETCH ONE COLLECTION : fetch to the json server
+    async function fetchOneCollection(id) {
+      try {
+        const response = await axios.get(`${API_COLLECTION_URL}/${id}`);
+        // console.log(response.data);
+        setOneCollection(response.data);
+        // console.log(oneCollection);
+      } catch (error) {
+        // console.error(error.message);
+        setErrorCollections(error);
+      } finally {
+        // console.log('finally');
+        setIsLoadingCollections(false);
+      }
+    };
+
+  // CREATE COLLECTION : create a new collection and send it to the json server
   async function createCollection(collection) {
     try {
       const response = await axios.post(API_COLLECTION_URL, {collection});
@@ -43,10 +63,14 @@ function Provider( { children } ) {
   // data to share in the app
   const valueToShare = {
     collections: collections,
+    fetchCollections: fetchCollections,
+    oneCollection: oneCollection,
+    fetchOneCollection: fetchOneCollection,
+    selectedCollection: selectedCollection,
+    setSelectedCollection: setSelectedCollection,
+    createCollection: createCollection,
     isLoadingCollections: isLoadingCollections,
     errorCollections: errorCollections,
-    fetchCollections: fetchCollections,
-    createCollection: createCollection,
   };
 
   return (
@@ -56,5 +80,5 @@ function Provider( { children } ) {
   );
 }
 
-export { Provider };
+export { ProviderCollections };
 export default CollectionsContext;

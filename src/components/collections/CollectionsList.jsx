@@ -5,15 +5,14 @@ import { API_COLLECTION_URL } from '../../api/constantsAPI';
 import { COLLECTION_NEW_PATH, RECIPES_PATH } from '../../constants';
 import useCollectionsContext from '../../hooks/use-collections-context';
 
-function CollectionsList({setSelectedCollection}) {
+function CollectionsList() {
 
-  // const [collections, setCollections] = useState([]);
-  const {collections, isLoadingCollections, errorCollections} = useCollectionsContext();
+  const {collections, isLoadingCollections, errorCollections, setSelectedCollection} = useCollectionsContext();
 
   const navigate = useNavigate();
 
-  function handleClick(collection) {
-    setSelectedCollection(collection);  // Mise à jour du paramètre
+  function handleClick(collectionId) {
+    setSelectedCollection(collectionId);  // Mise à jour du paramètre
     navigate(RECIPES_PATH);  // Navigation vers la nouvelle page avec le paramètre mis à jour
   };
 
