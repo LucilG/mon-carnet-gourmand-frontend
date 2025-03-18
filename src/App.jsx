@@ -1,7 +1,7 @@
 import './App.css'
 import './styles/Colors.css';
 import './styles/Buttons.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
@@ -12,16 +12,21 @@ import RecipesList from './components/recipes/RecipesList';
 import CollectionNew from './components/collections/CollectionNew';
 import RecipeNew from './components/recipes/RecipeNew';
 import RecipeShow from './components/recipes/RecipeShow';
+import CollectionsContext from './context/collections';
 
 function App() {
   // (dark/light) theme mode which takes by default the local config
   const preferences = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [darkMode, setDarkMode] = useState(preferences);
-
   useEffect(() => {
     setDarkMode(preferences);
-}, []);
+  }, []);
 
+  // fetch to the json server when refreshing the page
+  const { fetchCollections } = useContext(CollectionsContext);
+  useEffect(()=> {
+    fetchCollections();
+  }, []);
 
   const [selectedCollection, setSelectedCollection] = useState("all");
 

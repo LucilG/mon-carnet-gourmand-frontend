@@ -4,34 +4,19 @@ import { useNavigate, Link } from "react-router-dom";
 import { API_COLLECTION_URL } from '../../api/constantsAPI';
 import { COLLECTIONS_PATH } from '../../constants';
 import { FaArrowLeft } from "react-icons/fa6";
+import useCollectionsContext from '../../hooks/use-collections-context';
 
 function CollectionNew() {
   const [name, setName] = useState('');
-  const [, setLoading] = useState(true);
-  const [, setError] = useState(false);
   const navigate = useNavigate();
+
+  const { createCollection, isLoadingCollection, errorCollections } = useCollectionsContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await fetch(API_COLLECTION_URL,
-                                  { method: 'POST',
-                                    headers: { 'Content-Type': 'application/json'},
-                                    body: JSON.stringify({ "collection": {name} })
-                                  });
-      if (response.ok) {
-        // const NewRecipeJson = await response.json();
-        navigate(`/collections/`);
-      } else {
-        console.log("An error occured: ", e);
-        throw response;
-      }
-    } catch (e) {
-      setError("An error occured...");
-      console.log("An error occured: ", e);
-    } finally {
-      setLoading(false);
+    createCollection({name});
+    if (!isLoadingCollection && (errorCollections === null)) {
+      navigate(`/collections`);
     }
   }
 
