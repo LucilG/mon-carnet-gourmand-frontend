@@ -26,9 +26,8 @@ function App() {
   const { fetchCollections } = useContext(CollectionsContext);
   useEffect(()=> {
     fetchCollections();
+    return () => fetchCollections();
   }, []);
-
-  const [selectedCollection, setSelectedCollection] = useState("all");
 
   return (
     <Router>
@@ -36,10 +35,10 @@ function App() {
         <NavBar setDarkMode={setDarkMode} darkMode={darkMode}/>
         <Routes>
           <Route path={ROOT_PATH} element={<HomePage />} />
-          <Route path={RECIPES_PATH} element={<RecipesList collection={selectedCollection} />} />
+          <Route path={RECIPES_PATH} element={<RecipesList />} />
           <Route path={RECIPES_SHOW_PATH} element={<RecipeShow />} />
           <Route path={RECIPES_NEW_PATH} element={<RecipeNew />} />
-          <Route path={COLLECTIONS_PATH} element={<CollectionsList setSelectedCollection={setSelectedCollection}/>} />
+          <Route path={COLLECTIONS_PATH} element={<CollectionsList />} />
           <Route path={COLLECTION_NEW_PATH} element={<CollectionNew />} />
         </Routes>
         <Footer />
