@@ -1,33 +1,16 @@
 import '../../styles/collections/CollectionsList.css';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import { API_COLLECTION_URL } from '../../api/constantsAPI';
-import { fetchData } from '../../api/fetchData';
 import { COLLECTION_NEW_PATH, RECIPES_PATH } from '../../constants';
+import useCollectionsContext from '../../hooks/use-collections-context';
 
 function CollectionsList({setSelectedCollection}) {
 
-  const [collections, setCollections] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
+  // const [collections, setCollections] = useState([]);
+  const {collections, isLoadingCollections, errorCollections} = useCollectionsContext();
+
   const navigate = useNavigate();
-
-  //fetch the collections from the API
-  useEffect(() => {
-    const getCollections = async () => {
-      try {
-        const response = await fetchData(API_COLLECTION_URL);
-        setCollections(response);
-      } catch (error) {
-        setError(true);
-        console.error("An error occured: ", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    getCollections();
-  }, [])
 
   function handleClick(collection) {
     setSelectedCollection(collection);  // Mise à jour du paramètre
@@ -35,10 +18,10 @@ function CollectionsList({setSelectedCollection}) {
   };
 
   let content = <div />
-  if(isLoading) {
+  if(isLoadingCollections) {
     content = <div><p>Loading...</p></div>
-  } else if (error) {
-    content = <div><p>An error occured...</p></div>
+  } else if (errorCollections) {
+    content = <div><p>An error occured... {errorCollections.message} </p></div>
   } else {
     content = <div className="CollectionsList">
     <button key='all' onClick={() => handleClick(`all`)} className='collectionCard' >Voir tout</button>
