@@ -1,13 +1,16 @@
 import '../../styles/collections/CollectionsList.css';
 import React from 'react';
 import { useNavigate, Link } from "react-router-dom";
-import { API_COLLECTION_URL } from '../../api/constantsAPI';
 import { COLLECTION_NEW_PATH, RECIPES_PATH } from '../../constants';
 import useCollectionsContext from '../../hooks/use-collections-context';
+import CollectionCard from './CollectionCard';
 
 function CollectionsList() {
 
-  const {collections, isLoadingCollections, errorCollections, setSelectedCollection} = useCollectionsContext();
+  const { collections,
+        isLoadingCollections,
+        errorCollections,
+        setSelectedCollection} = useCollectionsContext();
 
   const navigate = useNavigate();
 
@@ -25,7 +28,7 @@ function CollectionsList() {
     content = <div className="CollectionsList">
     <button key='all' onClick={() => handleClick(`all`)} className='collectionCard' >Voir tout</button>
     {collections.map((collection) => (
-      <button key={collection.id} onClick={() => handleClick(`${collection.id}`)} className='collectionCard' >{collection.name}</button>
+      <CollectionCard key={collection.id} collection={collection} handleClick={handleClick} />
     ))}
     <Link to={COLLECTION_NEW_PATH} className='collectionCard' id="addCollection">+</Link>
     </div>

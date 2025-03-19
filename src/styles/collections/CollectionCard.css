@@ -1,0 +1,33 @@
+.collectionCard {
+  border: 3px solid var(--white);
+  border-radius: 15px;
+  width: 200px;
+  height: 200px;
+  align-content: center;
+  align-items: center;
+  text-decoration: none;
+  background-color: var(--green);
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.collectionCard:hover {
+  background-color: var(--yellow);
+  color: white;
+  /* border: 3px solid white; */
+  transform: rotateX(15deg);
+  transition: all 0.5s ease;
+
+}
+
+.collectionCardDeleteBtn {
+  position: absolute;
+  z-index: 2;
+  border-radius: 10px;
+  border: none;
+  background-color: white;
+  margin: 5px;
+  font-weight: bold;
+  color: var(--green);
+}

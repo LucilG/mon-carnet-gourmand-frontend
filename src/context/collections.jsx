@@ -44,12 +44,30 @@ function ProviderCollections( { children } ) {
       }
     };
 
-  // CREATE COLLECTION : create a new collection and send it to the json server
+  // CREATE A COLLECTION : create a new collection and send it to the json server
   async function createCollection(collection) {
     try {
       const response = await axios.post(API_COLLECTION_URL, {collection});
       // console.log(response);
       const updatedCollections = [...collections, response.data]
+      setCollections(updatedCollections);
+    } catch (error) {
+      // console.error(error.message);
+      setErrorCollections(error);
+    } finally {
+      // console.log('finally');
+      setIsLoadingCollections(false);
+    }
+  };
+
+  // DELETE A COLLECTION : delete a collection and send it to the json server
+  async function deleteCollection(id) {
+    try {
+      const response = await axios.delete(`${API_COLLECTION_URL}/${id}`);
+      // console.log(response);
+      const updatedCollections = collections.filter((collection) => {
+        return collection.id != id;
+      });
       setCollections(updatedCollections);
     } catch (error) {
       // console.error(error.message);
@@ -69,6 +87,7 @@ function ProviderCollections( { children } ) {
     selectedCollection: selectedCollection,
     setSelectedCollection: setSelectedCollection,
     createCollection: createCollection,
+    deleteCollection: deleteCollection,
     isLoadingCollections: isLoadingCollections,
     errorCollections: errorCollections,
   };

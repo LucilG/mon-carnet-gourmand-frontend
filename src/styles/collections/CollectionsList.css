@@ -9,29 +9,6 @@
   gap: 50px;
 }
 
-.collectionCard {
-  border: 3px solid var(--white);
-  border-radius: 15px;
-  width: 200px;
-  height: 200px;
-  align-content: center;
-  align-items: center;
-  text-decoration: none;
-  background-color: var(--green);
-  color: white;
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.collectionCard:hover {
-  background-color: var(--yellow);
-  color: white;
-  /* border: 3px solid white; */
-  transform: rotateX(20deg);
-  transition: all 0.5s ease;
-
-}
-
 #addCollection {
   font-size: 36px;
 }
