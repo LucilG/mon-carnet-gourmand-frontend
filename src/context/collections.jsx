@@ -29,7 +29,7 @@ function ProviderCollections( { children } ) {
   };
 
     // FETCH ONE COLLECTION : fetch to the json server
-    async function fetchOneCollection(id) {
+    async function fetchOneCollectionById(id) {
       try {
         const response = await axios.get(`${API_COLLECTION_URL}/${id}`);
         // console.log(response.data);
@@ -61,7 +61,7 @@ function ProviderCollections( { children } ) {
   };
 
   // DELETE A COLLECTION : delete a collection and send it to the json server
-  async function deleteCollection(id) {
+  async function deleteCollectionById(id) {
     try {
       const response = await axios.delete(`${API_COLLECTION_URL}/${id}`);
       // console.log(response);
@@ -78,16 +78,38 @@ function ProviderCollections( { children } ) {
     }
   };
 
+    // EDIT A COLLECTION : edit a collection's name and send it to the json server
+    async function editCollectionById(id, newName) {
+      try {
+        const response = await axios.put(`${API_COLLECTION_URL}/${id}`, {name: newName});
+        // console.log(response);
+        const updatedCollections = collections.map((collection) => {
+          if (collection.id === id) {
+            return {...collection, ...response.data};
+          }
+          return collection;
+        });
+        setCollections(updatedCollections);
+      } catch (error) {
+        // console.error(error.message);
+        setErrorCollections(error);
+      } finally {
+        // console.log('finally');
+        setIsLoadingCollections(false);
+      }
+    };
+
   // data to share in the app
   const valueToShare = {
     collections: collections,
     fetchCollections: fetchCollections,
     oneCollection: oneCollection,
-    fetchOneCollection: fetchOneCollection,
+    fetchOneCollectionById: fetchOneCollectionById,
     selectedCollection: selectedCollection,
     setSelectedCollection: setSelectedCollection,
     createCollection: createCollection,
-    deleteCollection: deleteCollection,
+    deleteCollectionById: deleteCollectionById,
+    editCollectionById: editCollectionById,
     isLoadingCollections: isLoadingCollections,
     errorCollections: errorCollections,
   };

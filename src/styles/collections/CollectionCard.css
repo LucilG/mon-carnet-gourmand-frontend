@@ -18,11 +18,43 @@
   /* border: 3px solid white; */
   transform: rotateX(15deg);
   transition: all 0.5s ease;
-
 }
 
+.collectionCardActionBtns {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.collectionCardLinkBtn {
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* delete btn */
 .collectionCardDeleteBtn {
   position: absolute;
+  right: 8px;
+  top: 8px;
+  z-index: 2;
+  border-radius: 10px;
+  border: none;
+  background-color: white;
+  margin: 5px;
+  font-weight: bold;
+  color: var(--green);
+}
+
+/* edit btn */
+.collectionCardEditBtn {
+  position: absolute;
+  left: 8px;
+  top: 8px;
   z-index: 2;
   border-radius: 10px;
   border: none;
