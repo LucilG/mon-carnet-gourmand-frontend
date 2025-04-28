@@ -4,7 +4,7 @@
 import '../../styles/collections/CollectionsList.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from "react-router-dom";
-import { API_COLLECTION_URL } from '../../api/constantsAPI';
+import { API_COLLECTIONS_URL } from '../../api/constantsAPI';
 import { fetchData } from '../../api/fetchData';
 import { COLLECTION_NEW_PATH, RECIPES_PATH } from '../../constants';
 
@@ -20,7 +20,7 @@ function CollectionsList({setSelectedCollection}) {
   useEffect(() => {
     const getCollections = async () => {
       try {
-        const response = await fetchData(API_COLLECTION_URL);
+        const response = await fetchData(API_COLLECTIONS_URL);
         setCollections(response);
       } catch (error) {
         setErrorCollections(true);

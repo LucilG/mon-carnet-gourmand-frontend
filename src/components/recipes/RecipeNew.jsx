@@ -1,7 +1,9 @@
 import '../../styles/recipes/RecipeNew.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { API_RECIPE_URL, API_COLLECTION_URL } from '../../api/constantsAPI';
+import { API_RECIPES_URL, API_COLLECTIONS_URL } from '../../api/constantsAPI';
+import useCollectionsContext from '../../hooks/use-collections-context';
+import useRecipesContext from '../../hooks/use-recipes-context';
 
 function RecipeNew() {
   const [name, setName] = useState('');
@@ -10,60 +12,17 @@ function RecipeNew() {
   const [cooking_time, setCookingTime] = useState(0);
   const [instructions, setInstructions] = useState('');
   const [collection_id, setCollectionID] = useState(0);
-  const [collections, setCollections] = useState([]);
-  const [, setLoading] = useState(true);
-  const [, setError] = useState(false);
   const navigate = useNavigate();
 
-  // fetch the collections from the API
-    useEffect(() => {
-      async function loadCollections() {
-        try {
-          const response = await fetch(API_COLLECTION_URL);
-          if (response.ok) {
-            const CollectionJson = await response.json();
-            setCollections(CollectionJson);
-          } else {
-            throw response;
-          }
-        } catch (e) {
-          setError("An error occured...");
-          console.log("An error occured: ", e);
-        } finally {
-          setLoading(false);
-        }
-      }
-      loadCollections();
-    }, [])
-
-  // update the collection
-  // const updateCollectionID = (e) => {
-  //   const collectionSelected = collections.find((collection) => collection.name === e.target.value)
-  //   setCollectionID(collections.find((collection) => collection.name === e.target.value).id);
-  // }
+  const { collections } = useCollectionsContext();
+  const { createRecipe, isLoadingRecipes, errorRecipes} = useRecipesContext();
 
   // When submit, to save the new recipe in the DB
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await fetch(API_RECIPE_URL,
-                                  { method: 'POST',
-                                    headers: { 'Content-Type': 'application/json'},
-                                    body: JSON.stringify({ "recipe": {name, nb_people, prepa_time, cooking_time, instructions, collection_id} })
-                                  });
-      if (response.ok) {
-        // const NewRecipeJson = await response.json();
-        navigate(`/collections/`);
-      } else {
-        console.log("An error occured: ", e);
-        throw response;
-      }
-    } catch (e) {
-      setError("An error occured...");
-      console.log("An error occured: ", e);
-    } finally {
-      setLoading(false);
+    createRecipe({name, nb_people, prepa_time, cooking_time, instructions, collection_id});
+    if (!isLoadingRecipes && (errorRecipes === null)) {
+      navigate(`/collections`);
     }
   }
 
