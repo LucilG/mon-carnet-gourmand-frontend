@@ -39,13 +39,13 @@ function RecipeShow() {
   let content = <div />
 
   if (recipe === null || loading === true ) {
-    content = <div className="RecipeShow"><h2>Loading...</h2></div>
+    content = <div className="container-page"><h2>Loading...</h2></div>
   } else if (error) {
-    content = <div className="RecipeShow"><h2>Error while loading recipe...</h2></div>
+    content = <div className="container-page"><h2>Error while loading recipe...</h2></div>
   } else {
     content =
-    <div>
-      <div className="RecipeShowBanner">
+      <div className='RecipeShow'>
+        <div className="RecipeShowBanner">
           <div className="RecipeShowBannerInfos">
             <h2>{recipe.name.toUpperCase()}</h2>
             <div className="RecipeShowBannerSubIcones">
@@ -65,6 +65,7 @@ function RecipeShow() {
           </div>
           <FaFileArrowDown alt="download file" />
         </div>
+
         <div className="RecipeShowIngredients">
           <div className="RecipeShowIngredientsNbPeople">
             <FaUsers  alt="number of people" />
@@ -75,17 +76,17 @@ function RecipeShow() {
           <p>Ingredients :</p>
           <p>TO DO...</p>
         </div>
+
         <div className="RecipeShowInstructions">
           <p>Instructions : </p>
           <p>{recipe.instructions}</p>
         </div>
-      <div/>
-    </div>
+      </div>
   }
 
 
   return (
-    <div className="RecipeShow">
+    <div className="container-page">
       <Link to={COLLECTIONS_PATH} className='gobackbtn'>
         <FaArrowLeft />
         <p>Go Back</p>

@@ -6,6 +6,8 @@ const RecipesContext = createContext();
 
 function ProviderRecipes( { children } ) {
   const [recipes, setRecipes] = useState([]);
+  const [oneRecipe, setOneRecipe] = useState(null);
+
   const [isLoadingRecipes, setIsLoadingRecipes] = useState(true);
   const [errorRecipes, setErrorRecipes] = useState(null);
 
@@ -24,12 +26,29 @@ function ProviderRecipes( { children } ) {
     }
   };
 
+  // FETCH ONE Recipe : fetch to the json server
+  async function fetchOneRecipe(id) {
+    try {
+      const response = await axios.get(`${API_RECIPE_URL}/${id}`);
+      // console.log(response.data);
+      setOneRecipe(response.data);
+      // console.log(oneRecipe);
+    } catch (error) {
+      // console.error(error.message);
+      setErrorRecipes(error);
+    } finally {
+      // console.log('finally');
+      setIsLoadingRecipes(false);
+    }
+  };
+
   // data to share in the app
   const valueToShare = {
     recipes: recipes,
     isLoadingRecipes: isLoadingRecipes,
     errorRecipes: errorRecipes,
     fetchRecipes: fetchRecipes,
+    fetchOneRecipe: fetchOneRecipe
   };
 
   return (
