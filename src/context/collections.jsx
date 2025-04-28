@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import axios from "axios";
-import { API_COLLECTION_URL } from '../api/constantsAPI';
+import { API_COLLECTIONS_URL } from '../api/constantsAPI';
 
 const CollectionsContext = createContext();
 
@@ -16,7 +16,7 @@ function ProviderCollections( { children } ) {
   // FETCH COLLECTIONS : fetch to the json server
   async function fetchCollections() {
     try {
-      const response = await axios.get(API_COLLECTION_URL);
+      const response = await axios.get(API_COLLECTIONS_URL);
       // console.log(response);
       setCollections(response.data);
     } catch (error) {
@@ -31,7 +31,7 @@ function ProviderCollections( { children } ) {
     // FETCH ONE COLLECTION : fetch to the json server
     async function fetchOneCollectionById(id) {
       try {
-        const response = await axios.get(`${API_COLLECTION_URL}/${id}`);
+        const response = await axios.get(`${API_COLLECTIONS_URL}/${id}`);
         // console.log(response.data);
         setOneCollection(response.data);
         // console.log(oneCollection);
@@ -47,7 +47,7 @@ function ProviderCollections( { children } ) {
   // CREATE A COLLECTION : create a new collection and send it to the json server
   async function createCollection(collection) {
     try {
-      const response = await axios.post(API_COLLECTION_URL, {collection});
+      const response = await axios.post(API_COLLECTIONS_URL, {collection});
       // console.log(response);
       const updatedCollections = [...collections, response.data]
       setCollections(updatedCollections);
@@ -63,7 +63,7 @@ function ProviderCollections( { children } ) {
   // DELETE A COLLECTION : delete a collection and send it to the json server
   async function deleteCollectionById(id) {
     try {
-      const response = await axios.delete(`${API_COLLECTION_URL}/${id}`);
+      const response = await axios.delete(`${API_COLLECTIONS_URL}/${id}`);
       // console.log(response);
       const updatedCollections = collections.filter((collection) => {
         return collection.id != id;
@@ -81,7 +81,7 @@ function ProviderCollections( { children } ) {
     // EDIT A COLLECTION : edit a collection's name and send it to the json server
     async function editCollectionById(id, newName) {
       try {
-        const response = await axios.put(`${API_COLLECTION_URL}/${id}`, {name: newName});
+        const response = await axios.put(`${API_COLLECTIONS_URL}/${id}`, {name: newName});
         // console.log(response);
         const updatedCollections = collections.map((collection) => {
           if (collection.id === id) {

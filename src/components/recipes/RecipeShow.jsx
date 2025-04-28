@@ -1,65 +1,54 @@
 import '../../styles/recipes/RecipeShow.css';
-import React, { useState, useEffect } from 'react';
-import { API_RECIPE_URL } from '../../api/constantsAPI';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
+import { Link } from "react-router-dom";
 import { FaFileArrowDown, FaUsers, FaArrowLeft } from "react-icons/fa6";
 import IconePrepaTime from '../../assets/icone_prepa_time.png';
 import IconeCookingTime from '../../assets/icone_cooking_time.png';
 import IconeTotalTime from '../../assets/icone_total_time.png';
-import { fetchData } from '../../api/fetchData';
 import { COLLECTIONS_PATH } from '../../constants';
-import { Link } from "react-router-dom";
+import useRecipesContext from '../../hooks/use-recipes-context';
+import useIngredientsContext from '../../hooks/use-ingredients-context';
 
 function RecipeShow() {
-  const [recipe, setRecipe] = useState(null)
   const { id } = useParams();
-  const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(true)
 
-  // Load recipe's information
-  const loadRecipe = async () => {
-    try {
-      const response = await fetchData(`${API_RECIPE_URL}/${id}`);
-      setRecipe(response);
-    } catch (error) {
-      setError(true);
-      console.error("An error occured: ", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  const { oneRecipe, isLoadingRecipes, errorRecipes, fetchOneRecipe } = useRecipesContext();
+  const { ingredients, fetchIngredients } = useIngredientsContext();
 
   // when params[:id] changes, load recipe's details
   useEffect(() => {
-    // loadRecipeDetails();
-    loadRecipe();
+    console.log(id);
+    fetchOneRecipe(id);
+    fetchIngredients(id);
+    console.log("ingredients: ");
+    console.log(ingredients);
   }, [id])
 
   let content = <div />
 
-  if (recipe === null || loading === true ) {
+  if (oneRecipe === null || isLoadingRecipes === true ) {
     content = <div className="container-page"><h2>Loading...</h2></div>
-  } else if (error) {
+  } else if (errorRecipes) {
     content = <div className="container-page"><h2>Error while loading recipe...</h2></div>
   } else {
     content =
       <div className='RecipeShow'>
         <div className="RecipeShowBanner">
           <div className="RecipeShowBannerInfos">
-            <h2>{recipe.name.toUpperCase()}</h2>
+            <h2>{oneRecipe.name.toUpperCase()}</h2>
             <div className="RecipeShowBannerSubIcones">
               <div className='RecipeShowBannerSubInfos'>
                 <img src={IconeTotalTime} alt="total time" className='RecipeShowIcone'/>
-                <p>Temps total : {recipe.prepa_time + recipe.cooking_time} min.</p>
+                <p>Temps total : {oneRecipe.prepa_time + oneRecipe.cooking_time} min.</p>
               </div>
               <div className='RecipeShowBannerSubInfos'>
                 <img src={IconePrepaTime} alt="preparation time" className='RecipeShowIcone'/>
-                <p>Préparation : {recipe.prepa_time} min.</p>
+                <p>Préparation : {oneRecipe.prepa_time} min.</p>
               </div>
               <div className='RecipeShowBannerSubInfos'>
                 <img src={IconeCookingTime} alt="cooking time" className='RecipeShowIcone'/>
-                <p>Cuisson : {recipe.cooking_time} min.</p>
+                <p>Cuisson : {oneRecipe.cooking_time} min.</p>
               </div>
             </div>
           </div>
@@ -70,16 +59,24 @@ function RecipeShow() {
           <div className="RecipeShowIngredientsNbPeople">
             <FaUsers  alt="number of people" />
             <p>-</p>
-            <p>{recipe.nb_people}</p>
+            <p>{oneRecipe.nb_people}</p>
             <p>+</p>
           </div>
           <p>Ingredients :</p>
-          <p>TO DO...</p>
+          <ul>
+            {ingredients.map((ingredient) => {
+              if (["a", "e", "i", "o", "u", "y"].includes(ingredient.name[0])) {
+                return <li>{ingredient.quantity} {ingredient.unit} d'{ingredient.name}</li>
+              } else {
+                return <li>{ingredient.quantity} {ingredient.unit} de {ingredient.name}</li>
+              }
+            })}
+          </ul>
         </div>
 
         <div className="RecipeShowInstructions">
           <p>Instructions : </p>
-          <p>{recipe.instructions}</p>
+          <p>{oneRecipe.instructions}</p>
         </div>
       </div>
   }

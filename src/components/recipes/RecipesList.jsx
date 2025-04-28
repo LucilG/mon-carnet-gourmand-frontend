@@ -1,7 +1,7 @@
 import '../../styles/recipes/RecipesList.css';
 import React, { useState, useEffect } from 'react';
 import RecipeCard from './RecipeCard';
-import { API_COLLECTION_URL } from '../../api/constantsAPI';
+import { API_COLLECTIONS_URL } from '../../api/constantsAPI';
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
 import { COLLECTIONS_PATH } from '../../constants';
@@ -20,7 +20,7 @@ function RecipesList() {
   // fetch the name of the current collection from the API
   const loadCollectionName = async () => {
     try {
-      const urlCollection = (selectedCollection === "all") ? `${API_COLLECTION_URL}` : `${API_COLLECTION_URL}/${selectedCollection}`;
+      const urlCollection = (selectedCollection === "all") ? `${API_COLLECTIONS_URL}` : `${API_COLLECTIONS_URL}/${selectedCollection}`;
       const response = await fetchData(urlCollection);
       (selectedCollection === "all") ? setCollectionName("Toutes mes recettes") : setCollectionName(response.name);
     } catch (error) {

@@ -1,7 +1,7 @@
 import '../../styles/collections/CollectionNew.css';
 import React, { useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
-import { API_COLLECTION_URL } from '../../api/constantsAPI';
+import { API_COLLECTIONS_URL } from '../../api/constantsAPI';
 import { COLLECTIONS_PATH } from '../../constants';
 import { FaArrowLeft } from "react-icons/fa6";
 import useCollectionsContext from '../../hooks/use-collections-context';

@@ -1,7 +1,7 @@
 import '../../styles/recipes/RecipesList.css';
 import React, { useState, useEffect } from 'react';
 import RecipeCard from './RecipeCard';
-import { API_RECIPE_URL, API_COLLECTION_URL } from '../../api/constantsAPI';
+import { API_RECIPES_URL, API_COLLECTIONS_URL } from '../../api/constantsAPI';
 import { fetchData } from '../../api/fetchData';
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
@@ -20,7 +20,7 @@ function RecipesList({collection}) {
   //fetch the recipes from the API
   const loadRecipes = async () => {
     try {
-      const response = await fetchData(API_RECIPE_URL);
+      const response = await fetchData(API_RECIPES_URL);
       setRecipes(response);
       setSelectedRecipes((collection === "all") ? response : response.filter((recipe) => (recipe.collection_id).toString() === collection.toString()));
     } catch (error) {
@@ -34,7 +34,7 @@ function RecipesList({collection}) {
   // fetch the name of the current collection from the API
   const loadCollectionName = async () => {
     try {
-      const urlCollection = (collection === "all") ? `${API_COLLECTION_URL}` : `${API_COLLECTION_URL}/${collection}`;
+      const urlCollection = (collection === "all") ? `${API_COLLECTIONS_URL}` : `${API_COLLECTIONS_URL}/${collection}`;
       const response = await fetchData(urlCollection);
       (collection === "all") ? setCollectionName("Toutes mes recettes") : setCollectionName(response.name);
     } catch (error) {
