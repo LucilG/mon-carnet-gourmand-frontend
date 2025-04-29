@@ -1,5 +1,5 @@
 import '../../styles/recipes/RecipeShow.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Link } from "react-router-dom";
 import { FaFileArrowDown, FaUsers, FaArrowLeft } from "react-icons/fa6";
@@ -12,21 +12,27 @@ import useIngredientsContext from '../../hooks/use-ingredients-context';
 
 function RecipeShow() {
   const { id } = useParams();
-
   const { oneRecipe, isLoadingRecipes, errorRecipes, fetchOneRecipe } = useRecipesContext();
   const { ingredients, fetchIngredients } = useIngredientsContext();
+  const [nbPeople, setNbPeople] = useState(1);
 
   // when params[:id] changes, load recipe's details
   useEffect(() => {
-    console.log(id);
     fetchOneRecipe(id);
     fetchIngredients(id);
-    console.log("ingredients: ");
-    console.log(ingredients);
-  }, [id])
+    oneRecipe && setNbPeople(oneRecipe.nb_people);
+  }, [id]);
 
+  // number of people
+  const addNbPeople = () => {
+    setNbPeople(nbPeople + 1);
+  };
+  const removeNbPeople = () => {
+    nbPeople > 1 && setNbPeople(nbPeople - 1);
+  };
+
+  // recipe conten
   let content = <div />
-
   if (oneRecipe === null || isLoadingRecipes === true ) {
     content = <div className="container-page"><h2>Loading...</h2></div>
   } else if (errorRecipes) {
@@ -34,6 +40,8 @@ function RecipeShow() {
   } else {
     content =
       <div className='RecipeShow'>
+
+        {/* Recipe's banner : general informations */}
         <div className="RecipeShowBanner">
           <div className="RecipeShowBannerInfos">
             <h2>{oneRecipe.name.toUpperCase()}</h2>
@@ -55,25 +63,30 @@ function RecipeShow() {
           <FaFileArrowDown alt="download file" />
         </div>
 
+        {/* Ingredients */}
         <div className="RecipeShowIngredients">
           <div className="RecipeShowIngredientsNbPeople">
             <FaUsers  alt="number of people" />
-            <p>-</p>
-            <p>{oneRecipe.nb_people}</p>
-            <p>+</p>
+            <p onClick={removeNbPeople}>-</p>
+            <p>{nbPeople}</p>
+            <p onClick={addNbPeople}>+</p>
           </div>
           <p>Ingredients :</p>
           <ul>
             {ingredients.map((ingredient) => {
+              let quantity = Math.trunc(ingredient.quantity * nbPeople / oneRecipe.nb_people);
+              // let quantity = (ingredient.quantity * nbPeople / oneRecipe.nb_people).toFixed(1);
+              quantity = quantity === 0 ? 1 : quantity;
               if (["a", "e", "i", "o", "u", "y"].includes(ingredient.name[0])) {
-                return <li>{ingredient.quantity} {ingredient.unit} d'{ingredient.name}</li>
+                return <li key={ingredient.id}>{quantity} {ingredient.unit} d'{ingredient.name}</li>
               } else {
-                return <li>{ingredient.quantity} {ingredient.unit} de {ingredient.name}</li>
+                return <li key={ingredient.id}>{quantity} {ingredient.unit} de {ingredient.name}</li>
               }
             })}
           </ul>
         </div>
 
+          {/* Recipe's instructions */}
         <div className="RecipeShowInstructions">
           <p>Instructions : </p>
           <p>{oneRecipe.instructions}</p>
@@ -84,11 +97,13 @@ function RecipeShow() {
 
   return (
     <div className="container-page">
+      {/* go back button */}
       <Link to={COLLECTIONS_PATH} className='gobackbtn'>
         <FaArrowLeft />
         <p>Go Back</p>
       </Link>
 
+      {/* recipe content */}
       {content}
     </div>
   )
