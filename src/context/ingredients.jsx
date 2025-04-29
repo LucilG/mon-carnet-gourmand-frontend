@@ -14,8 +14,6 @@ function ProviderIngredients( { children } ) {
   async function fetchIngredients(id) {
     try {
       const response = await axios.get(API_INGREDIENTS_URL);
-      console.log("response try: ");
-      console.log(response.data);
       if (response.data) {
         const filteredResponse = response.data.filter((element) => parseInt(element.recipe_id, 10) === parseInt(id, 10));
         setIngredients(filteredResponse);
